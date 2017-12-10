@@ -1,6 +1,7 @@
 #ifndef WIND_TRNASLATE_H
 #define WIND_TRNASLATE_H
 
+#include <stdlib.h>
 #include "Instruction.h"
 #include "ByteBuf.h"
 

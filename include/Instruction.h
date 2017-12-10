@@ -3,6 +3,7 @@
 
 typedef enum
 {
+        WindInstruc_Stop,
         WindInstruc_Int,
         WindInstruc_ExpStart,
         WindInstruc_ExpEnd
