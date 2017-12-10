@@ -11,6 +11,8 @@
 
 #define ByteBuf_LEN(buf) (buf->mark - buf->begin)
 
+#define ByteBuf_EMPTY(buf) (buf->begin == buf->mark)
+
 typedef struct
 {
         unsigned char* begin;
@@ -21,6 +23,8 @@ typedef struct
 ByteBuf* ByteBuf_new(size_t cap);
 
 void ByteBuf_del(ByteBuf* buf);
+
+void ByteBuf_expand(ByteBuf* buf, int factor);
 
 
 
