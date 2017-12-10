@@ -1,4 +1,5 @@
 #include "Translate.h"
+#include <ctype.h>
 
 ByteBuf* Translate_code(char* srcCode)
 {
@@ -15,6 +16,19 @@ ByteBuf* Translate_code(char* srcCode)
                 case '\v':
                         reader++;
                         break;
+                case '-':
+                        if(reader[1] == '>')
+                        {
+                                ByteBuf_write_byte(insBuf, WindInstruc_Continue);
+                                reader += 2;
+                                break;
+                        }
+                        else if(isdigit(reader[1]))
+                        {
+                                ByteBuf_write_byte(insBuf, WindInstruc_Int);
+                                ByteBuf_write_long(insBuf, strtol(reader, &reader, 10));
+                                break;
+                        }
                 case '0':
                 case '1':
                 case '2':
@@ -32,7 +46,7 @@ ByteBuf* Translate_code(char* srcCode)
                 default:
                         fprintf(stderr, "Syntax Error: Unexpected token: '%c'\n", *reader);
                         exit(1);
-                        return NULL
+                        return NULL;
                 }
         }
         ByteBuf_write_byte(insBuf, WindInstruc_Stop);
