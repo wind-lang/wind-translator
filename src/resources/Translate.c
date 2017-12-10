@@ -15,6 +15,20 @@ ByteBuf* Translate_code(char* srcCode)
                 case '\v':
                         reader++;
                         break;
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                        ByteBuf_write_byte(insBuf, WindInstruc_Int);
+                        ByteBuf_write_long(insBuf, strtol(reader, &reader, 10));
+                        break;
+
                 default:
                         fprintf(stderr, "Syntax Error: Unexpected token: '%c'\n", *reader);
                         exit(1);
