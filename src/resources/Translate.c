@@ -29,6 +29,12 @@ ByteBuf* Translate_code(char* srcCode)
                                 ByteBuf_write_long(insBuf, strtol(reader, &reader, 10));
                                 break;
                         }
+                        else
+                        {
+                                fprintf(stderr, "Syntax Error: Unexpected token: '-%c'\n", *(reader + 1));
+                                exit(1);
+                                return NULL;
+                        }
                 case '0':
                 case '1':
                 case '2':
@@ -41,6 +47,10 @@ ByteBuf* Translate_code(char* srcCode)
                 case '9':
                         ByteBuf_write_byte(insBuf, WindInstruc_Int);
                         ByteBuf_write_long(insBuf, strtol(reader, &reader, 10));
+                        break;
+                case '(':
+                        break;
+                case ')':
                         break;
 
                 default:
