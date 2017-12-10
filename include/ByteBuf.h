@@ -13,6 +13,8 @@
 
 #define ByteBuf_EMPTY(buf) (buf->begin == buf->mark)
 
+#define ByteBuf_FULL(buf) (buf->mark == buf->end)
+
 typedef struct
 {
         unsigned char* begin;
@@ -25,6 +27,14 @@ ByteBuf* ByteBuf_new(size_t cap);
 void ByteBuf_del(ByteBuf* buf);
 
 void ByteBuf_expand(ByteBuf* buf, int factor);
+
+void ByteBuf_write_byte(ByteBuf* buf, unsigned char byte);
+
+void ByteBuf_write_long(ByteBuf* buf, long num);
+
+void ByteBuf_write_data(ByteBuf* buf, void* data, size_t amount);
+
+void ByteBuf_to_file(ByteBuf* buf, const char* name);
 
 
 
