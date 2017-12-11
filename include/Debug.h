@@ -9,6 +9,10 @@
 
 #define Debug_FOOTER puts("-------------end--------------")
 
+/** Debug Printing Function
+ * - prints out readable version of Translated Wind Instructions
+ *
+ */
 void Debug_print(unsigned char* start, unsigned char* end);
 
 #endif
