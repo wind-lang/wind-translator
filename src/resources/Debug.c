@@ -6,7 +6,7 @@ void Debug_print(unsigned char* start, unsigned char* end)
 
         puts("Literal Instructions:");
         unsigned char* insPtr;
-        puts("[ ");
+        printf("[ ");
         for(insPtr = start; insPtr != end; insPtr++)
         {
                 printf("%u ", *insPtr);
@@ -48,6 +48,10 @@ void Debug_print(unsigned char* start, unsigned char* end)
                         break;
                 case WindInstruc_Continue:
                         puts("Continue: '->';");
+                        start++;
+                        break;
+                case WindInstruc_Apply:
+                        puts("Apply: '.';");
                         start++;
                         break;
                 case WindInstruc_Int:
