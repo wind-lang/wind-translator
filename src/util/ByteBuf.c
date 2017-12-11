@@ -52,6 +52,33 @@ void ByteBuf_write_data(ByteBuf* buf, void* data, size_t amount)
         memcpy(buf->begin, data, amount);
 }
 
+void ByteBuf_write_str(ByteBuf* buf, char** string, unsigned char bound)
+{
+        if(ByteBuf_FULL(buf)) ByteBuf_expand(buf, 2);
+        *(buf->mark) = bound;
+        buf->mark++;
+        while(**string)
+        {
+                if(**string == '"')
+
+                {
+                        *string += 1;
+                        if(ByteBuf_FULL(buf)) ByteBuf_expand(buf, 2);
+                        *(buf->mark) = bound;
+                        buf->mark++;
+                        return;
+                }
+                else
+                {
+                        if(ByteBuf_FULL(buf)) ByteBuf_expand(buf, 2);
+                        *(buf->mark) = **string;
+                        buf->mark++;
+                        *string += 1;
+                }
+        }
+        fprintf(stderr, "%s\n", "String Error: Found null char inside string literal.");
+}
+
 void ByteBuf_to_file(ByteBuf* buf, const char* name)
 {
         size_t fileSize = ByteBuf_LEN(buf);

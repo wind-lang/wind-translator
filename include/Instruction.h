@@ -7,7 +7,10 @@ typedef enum
         WindInstruc_Continue,
         WindInstruc_Int,
         WindInstruc_ExpStart,
-        WindInstruc_ExpEnd
+        WindInstruc_ExpEnd,
+        WindInstruc_ListStart,
+        WindInstruc_ListEnd,
+        WindInstruc_String
 } WindInstruc;
 
 #endif

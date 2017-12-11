@@ -49,8 +49,24 @@ ByteBuf* Translate_code(char* srcCode)
                         ByteBuf_write_long(insBuf, strtol(reader, &reader, 10));
                         break;
                 case '(':
+                        ByteBuf_write_byte(insBuf, WindInstruc_ExpStart);
+                        reader++;
                         break;
                 case ')':
+                        ByteBuf_write_byte(insBuf, WindInstruc_ExpEnd);
+                        reader++;
+                        break;
+                case '[':
+                        ByteBuf_write_byte(insBuf, WindInstruc_ListStart);
+                        reader++;
+                        break;
+                case ']':
+                        ByteBuf_write_byte(insBuf, WindInstruc_ListEnd);
+                        reader++;
+                        break;
+                case '"':
+                        reader++;
+                        ByteBuf_write_str(insBuf, &reader, WindInstruc_String);
                         break;
 
                 default:

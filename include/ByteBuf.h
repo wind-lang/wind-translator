@@ -34,6 +34,9 @@ void ByteBuf_write_long(ByteBuf* buf, long num);
 
 void ByteBuf_write_data(ByteBuf* buf, void* data, size_t amount);
 
+// writes all the chars until a " is found
+void ByteBuf_write_str(ByteBuf* buf, char** string, unsigned char bound);
+
 void ByteBuf_to_file(ByteBuf* buf, const char* name);
 
 
