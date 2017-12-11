@@ -92,4 +92,5 @@ void ByteBuf_to_file(ByteBuf* buf, const char* name)
         fwrite(&fileSize, sizeof(size_t), 1, writePtr);
         fseek(writePtr, sizeof(size_t), SEEK_SET);
         fwrite(buf->begin, fileSize, 1, writePtr);
+        fclose(writePtr);
 }
